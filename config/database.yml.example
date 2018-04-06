@@ -1,0 +1,23 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  timeout: 5000
+
+development:
+  <<: *default
+  database: api-with-rails-dev
+  host: localhost
+  username: postgres
+  password: postgres
+
+test:
+  <<: *default
+  database: api-with-rails-test
+  host: localhost
+  username: postgres
+  password: postgres
+
+production:
+  <<: *default
+  database: api-with-rails-production
