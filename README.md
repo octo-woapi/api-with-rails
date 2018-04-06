@@ -1,5 +1,8 @@
 # api-with-rails
 🛤 Sample API with Ruby on Rails
+
+⚠️ Work in progress - Not useful for now
+
 # README
 
 This README would normally document whatever steps are necessary to get the
