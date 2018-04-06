@@ -28,6 +28,7 @@ group :console do
 end
 
 group :development do
+  gem 'listen'
   gem 'rubocop', require: false
   gem 'rubocop-rspec', require: false
   gem 'spring'
