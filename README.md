@@ -3,27 +3,21 @@
 
 ⚠️ Work in progress - Not useful for now
 
-# README
+# API documentation
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Products
 
-Things you may want to cover:
+### GET /products
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```json
+[
+    {
+        "id": 1,
+        "name": "Yolo",
+        "price": 50,
+        "weight": 40,
+        "createdAt": "2018-04-06T13:21:32.611Z",
+        "updatedAt": "2018-04-06T13:21:32.611Z"
+    }
+]
+```
