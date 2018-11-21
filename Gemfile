@@ -8,14 +8,9 @@ gem 'rails', '5.1.6'
 gem 'pg' # Using PostgreSQL as DB
 gem 'puma'
 
-gem 'devise'
-
-gem 'haml-rails'
 gem 'jbuilder'
 
 group :assets do
-  gem 'coffee-rails'
-  gem 'sass-rails'
   gem 'uglifier'
 end
 
@@ -34,7 +29,6 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'pry-byebug'
   gem 'rspec-rails'
-  gem 'teaspoon-jasmine'
 end
 
 group :test do
