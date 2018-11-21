@@ -8,10 +8,12 @@ gem 'rails', '5.1.6'
 gem 'pg' # Using PostgreSQL as DB
 gem 'puma'
 
+gem 'haml-rails'
 gem 'jbuilder'
 
 group :assets do
   gem 'uglifier'
+  gem 'sass-rails'
 end
 
 group :console do
@@ -23,9 +25,11 @@ group :development do
   gem 'rubocop', require: false
   gem 'rubocop-rspec', require: false
   gem 'spring'
+  gem 'guard-rspec', require: false
 end
 
 group :development, :test do
+  gem 'faker'
   gem 'factory_bot_rails'
   gem 'pry-byebug'
   gem 'rspec-rails'
