@@ -2,8 +2,8 @@
 
 source 'https://rubygems.org'
 
-ruby '2.5.0'
-gem 'rails', '5.1.5'
+ruby '2.5.3'
+gem 'rails', '5.1.6'
 
 gem 'pg' # Using PostgreSQL as DB
 gem 'puma'
