@@ -1,15 +1,58 @@
-# api-with-rails
-🛤 Sample API with Ruby on Rails
+# API with Ruby on Rails
 
-⚠️ Work in progress - Not useful for now
+> 🛤 Sample API with Ruby on Rails, following [Katapi](https://github.com/octo-woapi/katapi) contract.
 
-You can find example here: https://octo-woapi-rails.herokuapp.com/api/v1/products
+## Status
 
-# API documentation
+Runnable - You can find a live example here: https://octo-woapi-rails.herokuapp.com/api/v1/products
 
-## Products
+## Getting started
 
-### GET /products
+Install [rvm](https://rvm.io/)
+
+Use the relevant Ruby version
+```
+$ rvm use ruby-2.5.3
+```
+
+Install bundler
+```
+$ gem install bundler
+```
+
+Install other dependencies
+```
+$ bundle
+```
+
+Copy database file and fill it with your database settings
+```
+$ cp config/database.yml.example config/database.yml
+```
+
+Create and migrate database
+```
+$ rake db:create
+$ rake db:migrate
+```
+
+Run the tests
+```
+$ rake
+```
+
+Start the project
+```
+$ rails s # default port is 3000
+```
+
+## Features
+
+You can only GET /products for now, provided you have some in the database. :)
+
+### Products
+
+#### GET /products
 
 ```json
 [
