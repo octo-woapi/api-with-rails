@@ -2,11 +2,13 @@
 
 module Api
   module V1
-    class ProductsController < ApplicationController
-      respond_to :json
-
+    class ProductsController < ApiController
       def index
         @products = Product.order(created_at: :desc)
+      end
+
+      def show
+        @product = Product.find(params[:id])
       end
     end
   end

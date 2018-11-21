@@ -5,9 +5,13 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1, defaults: { format: :json } do
-      resources :products, only: :index
+      resources :products, only: [:index, :show]
+
+      match '*path', to: 'api#not_found', via: :all
     end
   end
+
+  match '*path', to: 'application#not_found', via: :all
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

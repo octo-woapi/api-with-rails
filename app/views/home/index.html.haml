@@ -5,5 +5,11 @@
     See repository on Github:
     = link_to 'https://github.com/octo-woapi/api-with-rails', 'https://github.com/octo-woapi/api-with-rails'
   %p
-    See endpoint here:
-    = link_to api_v1_products_url, api_v1_products_url
+    Available endpoints:
+    %ul
+      %li
+        GET 
+        = link_to api_v1_products_url, api_v1_products_url
+      %li
+        GET 
+        = link_to api_v1_product_url(Product.last), api_v1_product_url(Product.last)
