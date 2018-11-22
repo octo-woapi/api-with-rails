@@ -41,17 +41,17 @@ RSpec.describe Api::V1::ProductsController, type: :controller do
   describe 'POST #create' do
     let(:sample_product) { build :product }
 
-    before { post :create, params: product_params, format: :json }
+    before { post :create, params: create_params, format: :json }
 
     context 'when all parameters are provided' do
-      let(:product_params) { { name: sample_product.name, price: sample_product.price, weight: sample_product.weight } }
+      let(:create_params) { { name: sample_product.name, price: sample_product.price, weight: sample_product.weight } }
 
       it('returns http created') { expect(response).to have_http_status(:created) }
       it('returns header location') { expect(response.headers['Location']).not_to be_blank }
     end
 
     context 'when some parameters are missing' do
-      let(:product_params) { { name: sample_product.name } }
+      let(:create_params) { { name: sample_product.name } }
 
       it('returns http bad_request') { expect(response).to have_http_status(:bad_request) }
       it('returns a json error') do
@@ -59,6 +59,44 @@ RSpec.describe Api::V1::ProductsController, type: :controller do
         expect(response.body).to include('Price')
         expect(response.body).to include('Weight')
       end
+    end
+  end
+
+  describe 'PUT #update' do
+    let(:product_to_update) { create :product }
+    let(:sample_product) { build :product }
+
+    before { put :update, params: update_params, format: :json }
+
+    context 'when product does not exist' do
+      let(:update_params) { { id: 999 } }
+
+      it('returns http not_found') { expect(response).to have_http_status(:not_found) }
+    end
+
+    context 'when all parameters are provided' do
+      let(:update_params) do
+        {
+          id: product_to_update.id,
+          name: sample_product.name,
+          price: sample_product.price,
+          weight: sample_product.weight
+        }
+      end
+
+      it('returns http ok') { expect(response).to have_http_status(:ok) }
+    end
+
+    context 'when another parameter is provided' do
+      let(:update_params) { { id: product_to_update.id, other: 'wrong parameter' } }
+
+      it('returns http ok') { expect(response).to have_http_status(:ok) }
+    end
+
+    context 'when no parameter is provided' do
+      let(:update_params) { { id: product_to_update.id } }
+
+      it('returns http ok') { expect(response).to have_http_status(:ok) }
     end
   end
 end

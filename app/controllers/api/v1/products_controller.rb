@@ -12,15 +12,19 @@ module Api
       end
 
       def create
-        @product = Product.create!(create_params)
+        @product = Product.create!(product_params)
         render 'show', status: :created, location: api_v1_product_url(@product)
-      rescue ActiveRecord::RecordInvalid => error
-        render body: { error: error.message }.to_json, status: :bad_request
+      end
+
+      def update
+        @product = Product.find(params[:id])
+        @product.update!(product_params)
+        render 'show'
       end
 
       private
 
-      def create_params
+      def product_params
         params.permit(%i[name price weight])
       end
     end

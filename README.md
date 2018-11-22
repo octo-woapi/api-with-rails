@@ -89,3 +89,13 @@ You can only GET /products for now, provided you have some in the database. :)
     "weight": 3
 }
 ```
+
+#### PUT /products/1
+
+```json
+{
+    "name": "Nintendo Switch",
+    "price": 300,
+    "weight": 3,
+}
+```
