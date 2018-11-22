@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     namespace :v1, defaults: { format: :json } do
       resources :products, only: %i[index show create update destroy]
       resources :orders, only: %i[index show create update destroy]
+      resources :bills, only: %i[index show]
 
       match '*path', to: 'api#not_found', via: :all
     end

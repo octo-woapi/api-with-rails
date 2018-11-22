@@ -34,6 +34,7 @@ Create and migrate database
 ```
 $ rake db:create
 $ rake db:migrate
+$ rake db:seed
 ```
 
 Run the tests
@@ -153,3 +154,29 @@ You can only GET /products for now, provided you have some in the database. :)
 ```
 
 #### DELETE /orders/1
+
+### Bills
+
+#### GET /bills
+
+```json
+[
+    {
+        "id": 1,
+        "amount": 250,
+        "createdAt": "2018-04-06T13:21:32.611Z",
+        "updatedAt": "2018-04-06T13:21:32.611Z"
+    }
+]
+```
+
+#### GET /bills/1
+
+```json
+{
+    "id": 1,
+    "amount": 250,
+    "createdAt": "2018-04-06T13:21:32.611Z",
+    "updatedAt": "2018-04-06T13:21:32.611Z"
+}
+```

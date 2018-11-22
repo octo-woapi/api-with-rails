@@ -9,37 +9,49 @@
     %ul
       %li
         Products
+        - product = Product.order("RANDOM()").first
         %ul
           %li
             GET 
             = link_to api_v1_products_url, api_v1_products_url
           %li
             GET 
-            = link_to api_v1_product_url(Product.last), api_v1_product_url(Product.last)
+            = link_to api_v1_product_url(product), api_v1_product_url(product)
           %li
             POST 
             = api_v1_products_url
           %li
             PUT 
-            = api_v1_product_url(Product.last)
+            = api_v1_product_url(product)
           %li
             DELETE 
-            = api_v1_product_url(Product.last)
+            = api_v1_product_url(product)
       %li
         Orders
+        - order = Order.order("RANDOM()").first
         %ul
           %li
             GET 
             = link_to api_v1_orders_url, api_v1_orders_url
           %li
             GET 
-            = link_to api_v1_order_url(Product.last), api_v1_order_url(Product.last)
+            = link_to api_v1_order_url(order), api_v1_order_url(order)
           %li
             POST 
             = api_v1_orders_url
           %li
             PUT 
-            = api_v1_order_url(Product.last)
+            = api_v1_order_url(order)
           %li
             DELETE 
-            = api_v1_order_url(Product.last)
+            = api_v1_order_url(order)
+      %li
+        Bills
+        %ul
+          %li
+            GET 
+            = link_to api_v1_bills_url, api_v1_orders_url
+          %li
+            GET 
+            - bill = Bill.order("RANDOM()").first
+            = link_to api_v1_bill_url(bill), api_v1_bill_url(bill)

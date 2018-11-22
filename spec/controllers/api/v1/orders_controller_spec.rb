@@ -2,6 +2,7 @@
 
 require 'rails_helper'
 
+# rubocop:disable Metrics/BlockLength
 RSpec.describe Api::V1::OrdersController, type: :controller do
   describe 'GET #index' do
     context 'when there is no order' do
@@ -43,7 +44,13 @@ RSpec.describe Api::V1::OrdersController, type: :controller do
     before { post :create, params: create_params, format: :json }
 
     context 'when all parameters are provided' do
-      let(:create_params) { { shipment_amount: sample_order.shipment_amount, total_amount: sample_order.total_amount, weight: sample_order.weight } }
+      let(:create_params) do
+        {
+          shipment_amount: sample_order.shipment_amount,
+          total_amount: sample_order.total_amount,
+          weight: sample_order.weight
+        }
+      end
 
       it('returns http created') { expect(response).to have_http_status(:created) }
       it('returns header location') { expect(response.headers['Location']).not_to be_blank }
@@ -118,3 +125,4 @@ RSpec.describe Api::V1::OrdersController, type: :controller do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength
