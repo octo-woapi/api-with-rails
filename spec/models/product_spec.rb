@@ -3,6 +3,15 @@
 require 'rails_helper'
 
 RSpec.describe Product, type: :model do
+  describe 'associations' do
+    subject(:product) { build :product }
+
+    it do
+      expect(product).to have_many(:order_products)
+      expect(product).to have_many(:orders)
+    end
+  end
+
   describe 'validations' do
     subject(:product) { build :product }
 
