@@ -12,12 +12,27 @@ RSpec.describe Api::V1::ProductsController, type: :controller do
     end
 
     context 'when there are some products' do
-      before do
-        create_list :product, 2
-        get :index, format: :json
+      before { allow(Product).to receive(:sort) }
+
+      context 'without sort parameter' do
+        before do
+          create_list :product, 2
+          get :index, format: :json
+        end
+
+        it('returns http success') { expect(response).to have_http_status(:success) }
+        it('calls sort scope') { expect(Product).to have_received(:sort).with(nil) }
       end
 
-      it('returns http success') { expect(response).to have_http_status(:success) }
+      context 'with sort parameter' do
+        before do
+          create_list :product, 2
+          get :index, params: { sort: 'name' }, format: :json
+        end
+
+        it('returns http success') { expect(response).to have_http_status(:success) }
+        it('calls sort scope') { expect(Product).to have_received(:sort).with('name') }
+      end
     end
   end
 
