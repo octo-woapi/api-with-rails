@@ -101,3 +101,55 @@ You can only GET /products for now, provided you have some in the database. :)
 ```
 
 #### DELETE /products/1
+
+### Orders
+
+#### GET /orders
+
+```json
+[
+    {
+        "id": 1,
+        "shipment_amount": 10,
+        "total_amount": 300,
+        "weight": 28,
+        "createdAt": "2018-04-06T13:21:32.611Z",
+        "updatedAt": "2018-04-06T13:21:32.611Z"
+    }
+]
+```
+
+#### GET /orders/1
+
+```json
+{
+    "id": 1,
+    "shipment_amount": 10,
+    "total_amount": 300,
+    "weight": 28,
+    "createdAt": "2018-04-06T13:21:32.611Z",
+    "updatedAt": "2018-04-06T13:21:32.611Z"
+}
+```
+
+#### POST /orders
+
+```json
+{
+    "shipment_amount": 10,
+    "total_amount": 300,
+    "weight": 28
+}
+```
+
+#### PUT /orders/1
+
+```json
+{
+    "shipment_amount": 10,
+    "total_amount": 300,
+    "weight": 28,
+}
+```
+
+#### DELETE /orders/1

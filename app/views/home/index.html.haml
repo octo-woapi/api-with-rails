@@ -8,17 +8,38 @@
     Available endpoints:
     %ul
       %li
-        GET 
-        = link_to api_v1_products_url, api_v1_products_url
+        Products
+        %ul
+          %li
+            GET 
+            = link_to api_v1_products_url, api_v1_products_url
+          %li
+            GET 
+            = link_to api_v1_product_url(Product.last), api_v1_product_url(Product.last)
+          %li
+            POST 
+            = api_v1_products_url
+          %li
+            PUT 
+            = api_v1_product_url(Product.last)
+          %li
+            DELETE 
+            = api_v1_product_url(Product.last)
       %li
-        GET 
-        = link_to api_v1_product_url(Product.last), api_v1_product_url(Product.last)
-      %li
-        POST 
-        = api_v1_products_url
-      %li
-        PUT 
-        = api_v1_product_url(Product.last)
-      %li
-        DELETE 
-        = api_v1_product_url(Product.last)
+        Orders
+        %ul
+          %li
+            GET 
+            = link_to api_v1_orders_url, api_v1_orders_url
+          %li
+            GET 
+            = link_to api_v1_order_url(Product.last), api_v1_order_url(Product.last)
+          %li
+            POST 
+            = api_v1_orders_url
+          %li
+            PUT 
+            = api_v1_order_url(Product.last)
+          %li
+            DELETE 
+            = api_v1_order_url(Product.last)
