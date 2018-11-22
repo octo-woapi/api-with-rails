@@ -12,8 +12,8 @@ gem 'haml-rails'
 gem 'jbuilder'
 
 group :assets do
-  gem 'uglifier'
   gem 'sass-rails'
+  gem 'uglifier'
 end
 
 group :console do
@@ -21,16 +21,16 @@ group :console do
 end
 
 group :development do
+  gem 'guard-rspec', require: false
   gem 'listen'
   gem 'rubocop', require: false
   gem 'rubocop-rspec', require: false
   gem 'spring'
-  gem 'guard-rspec', require: false
 end
 
 group :development, :test do
-  gem 'faker'
   gem 'factory_bot_rails'
+  gem 'faker'
   gem 'pry-byebug'
   gem 'rspec-rails'
 end
