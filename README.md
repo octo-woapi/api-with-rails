@@ -79,3 +79,13 @@ You can only GET /products for now, provided you have some in the database. :)
     "updatedAt": "2018-04-06T13:21:32.611Z"
 }
 ```
+
+#### POST /products
+
+```json
+{
+    "name": "Nintendo Switch",
+    "price": 300,
+    "weight": 3
+}
+```
