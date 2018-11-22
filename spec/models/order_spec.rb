@@ -21,4 +21,12 @@ RSpec.describe Order, type: :model do
       expect(order).to validate_presence_of :weight
     end
   end
+
+  describe 'default status is pending' do
+    subject(:order) { create :order }
+
+    it do
+      expect(order.status).to eq('pending')
+    end
+  end
 end
