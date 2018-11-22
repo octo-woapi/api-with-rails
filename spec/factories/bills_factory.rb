@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :bill do
-    amount 1.5
+    amount { 1.5 }
   end
 end

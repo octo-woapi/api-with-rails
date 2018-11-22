@@ -4,8 +4,10 @@ require 'rails_helper'
 
 RSpec.describe Bill, type: :model do
   describe 'validations' do
+    subject(:bill) { build :bill }
+
     it do
-      is_expected.to validate_presence_of :amount
+      expect(bill).to validate_presence_of :amount
     end
   end
 end
