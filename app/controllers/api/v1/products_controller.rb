@@ -3,13 +3,13 @@
 module Api
   module V1
     class ProductsController < ApiController
+      before_action :find_product, only: %i[show update destroy]
+
       def index
         @products = Product.order(created_at: :desc)
       end
 
-      def show
-        @product = Product.find(params[:id])
-      end
+      def show; end
 
       def create
         @product = Product.create!(product_params)
@@ -17,12 +17,19 @@ module Api
       end
 
       def update
-        @product = Product.find(params[:id])
         @product.update!(product_params)
         render 'show'
       end
 
+      def destroy
+        @product.destroy!
+      end
+
       private
+
+      def find_product
+        @product = Product.find(params[:id])
+      end
 
       def product_params
         params.permit(%i[name price weight])

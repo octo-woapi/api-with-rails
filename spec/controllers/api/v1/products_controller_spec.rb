@@ -99,5 +99,24 @@ RSpec.describe Api::V1::ProductsController, type: :controller do
       it('returns http ok') { expect(response).to have_http_status(:ok) }
     end
   end
+
+  describe 'DELETE #destroy' do
+    let(:product_to_update) { create :product }
+    let(:sample_product) { build :product }
+
+    before { delete :destroy, params: delete_params, format: :json }
+
+    context 'when product does not exist' do
+      let(:delete_params) { { id: 999 } }
+
+      it('returns http not_found') { expect(response).to have_http_status(:not_found) }
+    end
+
+    context 'when product exist' do
+      let(:delete_params) { { id: product_to_update.id, other: 'wrong parameter' } }
+
+      it('returns http no_content') { expect(response).to have_http_status(:no_content) }
+    end
+  end
 end
 # rubocop:enable Metrics/BlockLength

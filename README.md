@@ -99,3 +99,5 @@ You can only GET /products for now, provided you have some in the database. :)
     "weight": 3,
 }
 ```
+
+#### DELETE /products/1
