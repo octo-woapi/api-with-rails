@@ -2,7 +2,6 @@
 
 require 'rails_helper'
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe Api::V1::OrdersController, type: :controller do
   describe 'GET #index' do
     context 'when there is no order' do
@@ -39,43 +38,53 @@ RSpec.describe Api::V1::OrdersController, type: :controller do
   end
 
   describe 'POST #create' do
-    let(:sample_order) { build :order }
-
-    before { post :create, params: create_params, format: :json }
-
-    context 'when all parameters are provided' do
+    context 'when products are provided' do
       let(:create_params) do
         {
-          shipment_amount: sample_order.shipment_amount,
-          total_amount: sample_order.total_amount,
-          weight: sample_order.weight
+          'products' => [{
+            'id' => '1',
+            'quantity' => '3'
+          }]
         }
+      end
+      let(:returned_order) { create :order }
+
+      before do
+        allow(UseCases::CreateOrder).to receive(:with_products!).and_return(returned_order)
+        post :create, params: create_params, format: :json
+      end
+
+      it('calls use case') do
+        expect(UseCases::CreateOrder).to have_received(:with_products!).with(create_params)
       end
 
       it('returns http created') { expect(response).to have_http_status(:created) }
       it('returns header location') { expect(response.headers['Location']).not_to be_blank }
     end
 
-    context 'when some parameters are missing' do
-      let(:create_params) { { shipment_amount: sample_order.shipment_amount } }
+    # context 'when products is empty' do
+    #   before do
+    #     allow(UseCases::CreateOrder).to receive(:with_products!).and_raise(StandardError)
+    #     post :create, params: {}, format: :json
+    #   end
 
-      it('returns http bad_request') { expect(response).to have_http_status(:bad_request) }
-      it('returns a json error') do
-        expect(response.body).to include('Validation failed')
-        expect(response.body).to include('Total amount')
-        expect(response.body).to include('Weight')
-      end
-    end
+    #   it('calls use case') { expect(UseCases::CreateOrder).to have_received(:with_products!).with(create_params) }
+    #   it('returns http bad_request') { expect(response).to have_http_status(:bad_request) }
+    #   it('returns a json error') do
+    #     expect(response.body).to include('Validation failed')
+    #     expect(response.body).to include('Total amount')
+    #     expect(response.body).to include('Weight')
+    #   end
+    # end
   end
 
   describe 'PUT #update' do
     let(:order_to_update) { create :order }
-    let(:sample_order) { build :order }
-
-    before { put :update, params: update_params, format: :json }
 
     context 'when order does not exist' do
       let(:update_params) { { id: 999 } }
+
+      before { put :update, params: update_params, format: :json }
 
       it('returns http not_found') { expect(response).to have_http_status(:not_found) }
     end
@@ -83,32 +92,31 @@ RSpec.describe Api::V1::OrdersController, type: :controller do
     context 'when all parameters are provided' do
       let(:update_params) do
         {
-          id: order_to_update.id,
-          shipment_amount: sample_order.shipment_amount,
-          total_amount: sample_order.total_amount,
-          weight: sample_order.weight
+          'id' => order_to_update.id.to_s,
+          'products' => [{
+            'id' => '1',
+            'quantity' => '3'
+          }],
+          'status' => 'paid'
         }
       end
+      let(:returned_order) { create :order }
 
-      it('returns http ok') { expect(response).to have_http_status(:ok) }
-    end
+      before do
+        allow(UseCases::UpdateOrder).to receive(:with_products!).and_return(returned_order)
+        put :update, params: update_params, format: :json
+      end
 
-    context 'when another parameter is provided' do
-      let(:update_params) { { id: order_to_update.id, other: 'wrong parameter' } }
+      it('calls use case') do
+        expect(UseCases::UpdateOrder).to have_received(:with_products!).with(order_to_update, update_params)
+      end
 
-      it('returns http ok') { expect(response).to have_http_status(:ok) }
-    end
-
-    context 'when no parameter is provided' do
-      let(:update_params) { { id: order_to_update.id } }
-
-      it('returns http ok') { expect(response).to have_http_status(:ok) }
+      it('returns http created') { expect(response).to have_http_status(:ok) }
     end
   end
 
   describe 'DELETE #destroy' do
     let(:order_to_update) { create :order }
-    let(:sample_order) { build :order }
 
     before { delete :destroy, params: delete_params, format: :json }
 
@@ -125,4 +133,3 @@ RSpec.describe Api::V1::OrdersController, type: :controller do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

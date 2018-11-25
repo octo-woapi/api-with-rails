@@ -114,6 +114,13 @@ You can only GET /products for now, provided you have some in the database. :)
         "shipment_amount": 10,
         "total_amount": 300,
         "weight": 28,
+        "status": "pending",
+        "products": [
+            {
+                "id": 2,
+                "quantity": 3
+            }
+        ],
         "createdAt": "2018-04-06T13:21:32.611Z",
         "updatedAt": "2018-04-06T13:21:32.611Z"
     }
@@ -128,6 +135,13 @@ You can only GET /products for now, provided you have some in the database. :)
     "shipment_amount": 10,
     "total_amount": 300,
     "weight": 28,
+    "status": "pending",
+    "products": [
+        {
+            "id": 2,
+            "quantity": 3
+        }
+    ],
     "createdAt": "2018-04-06T13:21:32.611Z",
     "updatedAt": "2018-04-06T13:21:32.611Z"
 }
@@ -137,9 +151,12 @@ You can only GET /products for now, provided you have some in the database. :)
 
 ```json
 {
-    "shipment_amount": 10,
-    "total_amount": 300,
-    "weight": 28
+    "products": [
+        {
+            "id": 3,
+            "quantity": 1
+        }
+    ]
 }
 ```
 
@@ -147,9 +164,13 @@ You can only GET /products for now, provided you have some in the database. :)
 
 ```json
 {
-    "shipment_amount": 10,
-    "total_amount": 300,
-    "weight": 28,
+    "status": "paid",
+    "products": [
+        {
+            "id": 3,
+            "quantity": 1
+        }
+    ]
 }
 ```
 

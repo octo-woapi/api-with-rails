@@ -12,12 +12,12 @@ module Api
       def show; end
 
       def create
-        @order = Order.create!(order_params)
+        @order = UseCases::CreateOrder.with_products!(create_params)
         render 'show', status: :created, location: api_v1_order_url(@order)
       end
 
       def update
-        @order.update!(order_params)
+        @order = UseCases::UpdateOrder.with_products!(@order, update_params)
         render 'show'
       end
 
@@ -31,8 +31,12 @@ module Api
         @order = Order.find(params[:id])
       end
 
-      def order_params
-        params.permit(%i[shipment_amount total_amount weight])
+      def create_params
+        params.permit(products: %i[id quantity])
+      end
+
+      def update_params
+        params.permit(:id, :status, products: %i[id quantity])
       end
     end
   end

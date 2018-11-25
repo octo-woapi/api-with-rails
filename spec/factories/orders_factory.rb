@@ -2,8 +2,22 @@
 
 FactoryBot.define do
   factory :order do
-    shipment_amount { Random.rand(0..3) * 10 }
-    total_amount { Random.rand(3.0..100.0).round(2) }
-    weight { Random.rand(1..30) }
+    factory :order_with_products do
+      transient do
+        quantity { Random.rand(1..5) }
+        product_id do
+          product = create :product
+          product.id
+        end
+      end
+
+      initialize_with do
+        attributes = [{
+          product_id: product_id,
+          quantity: quantity
+        }]
+        Order.create!(order_products_attributes: attributes)
+      end
+    end
   end
 end

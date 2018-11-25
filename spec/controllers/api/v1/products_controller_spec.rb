@@ -2,7 +2,6 @@
 
 require 'rails_helper'
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe Api::V1::ProductsController, type: :controller do
   describe 'GET #index' do
     context 'when there is no product' do
@@ -117,7 +116,6 @@ RSpec.describe Api::V1::ProductsController, type: :controller do
 
   describe 'DELETE #destroy' do
     let(:product_to_update) { create :product }
-    let(:sample_product) { build :product }
 
     before { delete :destroy, params: delete_params, format: :json }
 
@@ -134,4 +132,3 @@ RSpec.describe Api::V1::ProductsController, type: :controller do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength
