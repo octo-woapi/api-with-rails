@@ -25,6 +25,7 @@ class Order < ApplicationRecord
     self.total_amount = order_products.reduce(0.0) do |total_amount, order_product|
       total_amount + order_product.total_amount
     end
+    self.total_amount *= 0.95 if total_amount >= 1000
   end
 
   def compute_weight

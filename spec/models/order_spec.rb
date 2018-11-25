@@ -87,9 +87,6 @@ RSpec.describe Order, type: :model do
   end
 
   describe 'compute attributes before saving' do
-    let(:product1) { create :product, price: 10, weight: 30 }
-    let(:product2) { create :product, price: 20, weight: 25 }
-
     let(:order_products) do
       [
         {
@@ -105,10 +102,27 @@ RSpec.describe Order, type: :model do
 
     let!(:order) { Order.create!(order_products_attributes: order_products) }
 
-    it do
-      expect(order.shipment_amount).to eq(30)
-      expect(order.total_amount).to eq(50)
-      expect(order.weight).to eq(80)
+    describe 'when products have a regular price and are light' do
+      let(:product1) { create :product, price: 10, weight: 10 }
+      let(:product2) { create :product, price: 20, weight: 5 }
+
+      it 'has neither a discount nor a shipment amount' do
+        expect(order.shipment_amount).to eq(0)
+        expect(order.total_amount).to eq(50)
+        expect(order.weight).to eq(20)
+      end
+    end
+
+    describe 'when products have a high price and are heavy' do
+      let(:product1) { create :product, price: 400, weight: 30 }
+      let(:product2) { create :product, price: 500, weight: 25 }
+
+      # TODO: Check if shipment amount should be added to total amount or not
+      it 'has a 5% discount and a shipment amount' do
+        expect(order.shipment_amount).to eq(30)
+        expect(order.total_amount).to eq(1330.0)
+        expect(order.weight).to eq(80)
+      end
     end
   end
 end
