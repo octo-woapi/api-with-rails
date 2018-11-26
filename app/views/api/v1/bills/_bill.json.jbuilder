@@ -2,7 +2,8 @@
 
 if bill
   json.extract! bill,
-                :amount
+                :amount,
+                :order_id
 
   # We change attributes case from snake_case to camelCase
   json.createdAt bill.created_at

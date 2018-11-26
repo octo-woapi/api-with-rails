@@ -185,6 +185,7 @@ You can only GET /products for now, provided you have some in the database. :)
     {
         "id": 1,
         "amount": 250,
+        "order_id": 3,
         "createdAt": "2018-04-06T13:21:32.611Z",
         "updatedAt": "2018-04-06T13:21:32.611Z"
     }
@@ -197,6 +198,7 @@ You can only GET /products for now, provided you have some in the database. :)
 {
     "id": 1,
     "amount": 250,
+    "order_id": 3,
     "createdAt": "2018-04-06T13:21:32.611Z",
     "updatedAt": "2018-04-06T13:21:32.611Z"
 }

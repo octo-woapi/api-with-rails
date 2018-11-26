@@ -3,5 +3,6 @@
 FactoryBot.define do
   factory :bill do
     amount { 1.5 }
+    association :order
   end
 end
