@@ -12,38 +12,40 @@ RSpec.describe Order, type: :model do
     end
   end
 
-  describe 'validations' do
-    let(:order) { create :order }
-
-    describe 'when order is pending and has no products' do
-      it 'does not have weight, total_amount, shipment_amount' do
-        expect(order.weight).to eq(0)
-        expect(order.total_amount).to eq(0.0)
-        expect(order.shipment_amount).to be_nil
-      end
-    end
-
-    describe 'when order is paid' do
-      let(:order) { create :order_with_products, status: :paid }
-
-      it('must have a weight') do
-        expect { order.update!(weight: nil) }.to raise_error(ActiveRecord::RecordInvalid)
-      end
-
-      it('must have a total_amount') do
-        expect { order.update!(total_amount: nil) }.to raise_error(ActiveRecord::RecordInvalid)
-      end
-
-      it('must have a shipment_amount') do
-        expect { order.update!(shipment_amount: nil) }.to raise_error(ActiveRecord::RecordInvalid)
-      end
-    end
-  end
-
   describe 'default status is pending' do
     subject(:order) { create :order_with_products }
 
     it { expect(order.status).to eq('pending') }
+  end
+
+  describe 'update to paid' do
+    describe 'when order contains products' do
+      let(:order) { create :order_with_products }
+
+      describe 'effective status change' do
+        before { order.update! status: :paid }
+
+        it { expect(order.status).to eq('paid') }
+      end
+
+      describe 'bill creation' do
+        before { order.update! status: :paid }
+
+        it { expect(Bill.last&.order_id).to eq(order.id) }
+      end
+    end
+
+    describe 'when order does not contain products' do
+      let(:order) { create :order }
+
+      it { expect { order.update! status: :paid }.to raise_error(ActiveRecord::RecordInvalid) }
+    end
+
+    describe 'when order is canceled' do
+      let(:order) { create :order, status: :canceled }
+
+      it { expect { order.update!(status: :pending) }.to raise_error(ActiveRecord::ReadOnlyRecord) }
+    end
   end
 
   describe 'create order with products' do
