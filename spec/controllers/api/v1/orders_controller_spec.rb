@@ -54,7 +54,7 @@ RSpec.describe Api::V1::OrdersController, type: :controller do
         post :create, params: create_params, format: :json
       end
 
-      it('calls use case') do
+      it 'calls use case' do
         expect(UseCases::CreateOrder).to have_received(:with_products!).with(create_params)
       end
 
@@ -62,20 +62,25 @@ RSpec.describe Api::V1::OrdersController, type: :controller do
       it('returns header location') { expect(response.headers['Location']).not_to be_blank }
     end
 
-    # context 'when products is empty' do
-    #   before do
-    #     allow(UseCases::CreateOrder).to receive(:with_products!).and_raise(StandardError)
-    #     post :create, params: {}, format: :json
-    #   end
+    context 'when products is empty' do
+      let(:create_params) do
+        {
+          'products' => []
+        }
+      end
 
-    #   it('calls use case') { expect(UseCases::CreateOrder).to have_received(:with_products!).with(create_params) }
-    #   it('returns http bad_request') { expect(response).to have_http_status(:bad_request) }
-    #   it('returns a json error') do
-    #     expect(response.body).to include('Validation failed')
-    #     expect(response.body).to include('Total amount')
-    #     expect(response.body).to include('Weight')
-    #   end
-    # end
+      before do
+        allow(UseCases::CreateOrder).to receive(:with_products!)
+        post :create, params: create_params, format: :json
+      end
+
+      it('does not call use case') { expect(UseCases::CreateOrder).not_to have_received(:with_products!) }
+      it('returns http bad_request') { expect(response).to have_http_status(:bad_request) }
+      it('returns a json error') do
+        expect(response.body).to include('The following attributes are missing')
+        expect(response.body).to include('products')
+      end
+    end
   end
 
   describe 'PUT #update' do
@@ -107,11 +112,52 @@ RSpec.describe Api::V1::OrdersController, type: :controller do
         put :update, params: update_params, format: :json
       end
 
-      it('calls use case') do
+      it 'calls use case' do
         expect(UseCases::UpdateOrder).to have_received(:with_products!).with(order_to_update, update_params)
       end
 
-      it('returns http created') { expect(response).to have_http_status(:ok) }
+      it('returns http ok') { expect(response).to have_http_status(:ok) }
+    end
+
+    context 'when products does not contain id key' do
+      let(:update_params) do
+        {
+          'id' => order_to_update.id.to_s,
+          'products' => [
+            'quantity' => '2'
+          ]
+        }
+      end
+
+      before do
+        allow(UseCases::UpdateOrder).to receive(:with_products!)
+          .and_raise(ActiveRecord::RecordInvalid.new, 'product must exist')
+        put :update, params: update_params, format: :json
+      end
+
+      it('calls use case') { expect(UseCases::UpdateOrder).to have_received(:with_products!) }
+      it('returns http bad_request') { expect(response).to have_http_status(:bad_request) }
+      it('returns a json error') { expect(response.body).to include('product must exist') }
+    end
+
+    context 'when products is empty and quantity is missing' do
+      let(:update_params) do
+        {
+          'id' => order_to_update.id.to_s,
+          'products' => []
+        }
+      end
+
+      before do
+        allow(UseCases::UpdateOrder).to receive(:with_products!)
+        put :update, params: update_params, format: :json
+      end
+
+      it('does not call use case') { expect(UseCases::UpdateOrder).not_to have_received(:with_products!) }
+      it('returns http bad_request') { expect(response).to have_http_status(:bad_request) }
+      it('returns a json error') do
+        expect(response.body).to include('The following attributes are missing: status, products')
+      end
     end
   end
 

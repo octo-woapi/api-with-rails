@@ -4,8 +4,6 @@ module UseCases
   class CreateOrder
     class << self
       def with_products!(order)
-        raise StandardError unless order[:products].present?
-
         Order.create!(order_products_attributes: order_params(order))
       end
 
