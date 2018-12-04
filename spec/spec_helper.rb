@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'support/request_helpers'
+
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
@@ -9,6 +11,8 @@ RSpec.configure do |config|
   config.mock_with :rspec do |mocks|
     mocks.verify_partial_doubles = true
   end
+
+  config.include Request::JsonHelpers, type: :request
 
   config.shared_context_metadata_behavior = :apply_to_host_groups
 end
