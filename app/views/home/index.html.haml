@@ -9,49 +9,69 @@
     %ul
       %li
         Products
-        - product = Product.order("RANDOM()").first
         %ul
           %li
             GET 
             = link_to api_v1_products_url, api_v1_products_url
           %li
-            GET 
-            = link_to api_v1_product_url(product), api_v1_product_url(product)
-          %li
             POST 
             = api_v1_products_url
-          %li
-            PUT 
-            = api_v1_product_url(product)
-          %li
-            DELETE 
-            = api_v1_product_url(product)
+          - product = Product.order("RANDOM()").first
+          - if product
+            %li
+              GET 
+              = link_to api_v1_product_url(product), api_v1_product_url(product)
+            %li
+              PUT 
+              = api_v1_product_url(product)
+            %li
+              DELETE 
+              = api_v1_product_url(product)
+          - else
+            %li
+              GET /products/:id
+            %li
+              PUT /products/:id
+            %li
+              DELETE /products/:id
       %li
         Orders
-        - order = Order.order("RANDOM()").first
         %ul
           %li
             GET 
             = link_to api_v1_orders_url, api_v1_orders_url
           %li
-            GET 
-            = link_to api_v1_order_url(order), api_v1_order_url(order)
-          %li
             POST 
             = api_v1_orders_url
-          %li
-            PUT 
-            = api_v1_order_url(order)
-          %li
-            DELETE 
-            = api_v1_order_url(order)
+          - order = Order.order("RANDOM()").first
+          - if order
+            %li
+              GET 
+              = link_to api_v1_order_url(order), api_v1_order_url(order)
+            %li
+              PUT 
+              = api_v1_order_url(order)
+            %li
+              DELETE 
+              = api_v1_order_url(order)
+          - else
+            %li
+              GET /orders/:id
+            %li
+              PUT /orders/:id
+            %li
+              DELETE /orders/:id
       %li
         Bills
         %ul
           %li
             GET 
             = link_to api_v1_bills_url, api_v1_orders_url
-          %li
-            GET 
-            - bill = Bill.order("RANDOM()").first
-            = link_to api_v1_bill_url(bill), api_v1_bill_url(bill)
+          - bill = Bill.order("RANDOM()").first
+          - if bill
+            %li
+              GET 
+              = link_to api_v1_bill_url(bill), api_v1_bill_url(bill)
+          - else
+            %li
+              GET /orders/:id
