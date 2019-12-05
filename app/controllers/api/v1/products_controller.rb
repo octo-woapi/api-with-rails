@@ -6,7 +6,7 @@ module Api
       before_action :find_product, only: %i[show update destroy]
 
       def index
-        @products = Product.sort(params[:sort])
+        @products = Product.order_by(params[:sort])
       end
 
       def show; end

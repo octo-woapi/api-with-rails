@@ -11,7 +11,7 @@ RSpec.describe Api::V1::ProductsController, type: :controller do
     end
 
     context 'when there are some products' do
-      before { allow(Product).to receive(:sort) }
+      before { allow(Product).to receive(:order_by) }
 
       context 'without sort parameter' do
         before do
@@ -20,7 +20,7 @@ RSpec.describe Api::V1::ProductsController, type: :controller do
         end
 
         it('returns http success') { expect(response).to have_http_status(:success) }
-        it('calls sort scope') { expect(Product).to have_received(:sort).with(nil) }
+        it('calls order_by scope') { expect(Product).to have_received(:order_by).with(nil) }
       end
 
       context 'with sort parameter' do
@@ -30,7 +30,7 @@ RSpec.describe Api::V1::ProductsController, type: :controller do
         end
 
         it('returns http success') { expect(response).to have_http_status(:success) }
-        it('calls sort scope') { expect(Product).to have_received(:sort).with('name') }
+        it('calls order_by scope') { expect(Product).to have_received(:order_by).with('name') }
       end
     end
   end
@@ -68,6 +68,7 @@ RSpec.describe Api::V1::ProductsController, type: :controller do
       let(:create_params) { { name: sample_product.name } }
 
       it('returns http bad_request') { expect(response).to have_http_status(:bad_request) }
+
       it('returns a json error') do
         expect(response.body).to include('Validation failed')
         expect(response.body).to include('Price')

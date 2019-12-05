@@ -11,26 +11,31 @@ Runnable - You can find a live example here: https://octo-woapi-rails.herokuapp.
 Install [rvm](https://rvm.io/)
 
 Use the relevant Ruby version
+
 ```
-$ rvm use ruby-2.5.3
+$ rvm use ruby-2.5.7
 ```
 
 Install bundler
+
 ```
 $ gem install bundler
 ```
 
 Install other dependencies
+
 ```
 $ bundle
 ```
 
 Copy database file and fill it with your database settings
+
 ```
 $ cp config/database.yml.example config/database.yml
 ```
 
 Create and migrate database
+
 ```
 $ rake db:create
 $ rake db:migrate
@@ -38,11 +43,13 @@ $ rake db:seed
 ```
 
 Run the tests
+
 ```
 $ rake
 ```
 
 Start the project
+
 ```
 $ rails s # default port is 3000
 ```
@@ -57,14 +64,14 @@ You can only GET /products for now, provided you have some in the database. :)
 
 ```json
 [
-    {
-        "id": 1,
-        "name": "Nintendo Switch",
-        "price": 300,
-        "weight": 3,
-        "createdAt": "2018-04-06T13:21:32.611Z",
-        "updatedAt": "2018-04-06T13:21:32.611Z"
-    }
+  {
+    "id": 1,
+    "name": "Nintendo Switch",
+    "price": 300,
+    "weight": 3,
+    "createdAt": "2018-04-06T13:21:32.611Z",
+    "updatedAt": "2018-04-06T13:21:32.611Z"
+  }
 ]
 ```
 
@@ -72,12 +79,12 @@ You can only GET /products for now, provided you have some in the database. :)
 
 ```json
 {
-    "id": 1,
-    "name": "Nintendo Switch",
-    "price": 300,
-    "weight": 3,
-    "createdAt": "2018-04-06T13:21:32.611Z",
-    "updatedAt": "2018-04-06T13:21:32.611Z"
+  "id": 1,
+  "name": "Nintendo Switch",
+  "price": 300,
+  "weight": 3,
+  "createdAt": "2018-04-06T13:21:32.611Z",
+  "updatedAt": "2018-04-06T13:21:32.611Z"
 }
 ```
 
@@ -85,9 +92,9 @@ You can only GET /products for now, provided you have some in the database. :)
 
 ```json
 {
-    "name": "Nintendo Switch",
-    "price": 300,
-    "weight": 3
+  "name": "Nintendo Switch",
+  "price": 300,
+  "weight": 3
 }
 ```
 
@@ -95,9 +102,9 @@ You can only GET /products for now, provided you have some in the database. :)
 
 ```json
 {
-    "name": "Nintendo Switch",
-    "price": 300,
-    "weight": 3,
+  "name": "Nintendo Switch",
+  "price": 300,
+  "weight": 3
 }
 ```
 
@@ -109,21 +116,21 @@ You can only GET /products for now, provided you have some in the database. :)
 
 ```json
 [
-    {
-        "id": 1,
-        "shipment_amount": 10,
-        "total_amount": 300,
-        "weight": 28,
-        "status": "pending",
-        "products": [
-            {
-                "id": 2,
-                "quantity": 3
-            }
-        ],
-        "createdAt": "2018-04-06T13:21:32.611Z",
-        "updatedAt": "2018-04-06T13:21:32.611Z"
-    }
+  {
+    "id": 1,
+    "shipment_amount": 10,
+    "total_amount": 300,
+    "weight": 28,
+    "status": "pending",
+    "products": [
+      {
+        "id": 2,
+        "quantity": 3
+      }
+    ],
+    "createdAt": "2018-04-06T13:21:32.611Z",
+    "updatedAt": "2018-04-06T13:21:32.611Z"
+  }
 ]
 ```
 
@@ -131,19 +138,19 @@ You can only GET /products for now, provided you have some in the database. :)
 
 ```json
 {
-    "id": 1,
-    "shipment_amount": 10,
-    "total_amount": 300,
-    "weight": 28,
-    "status": "pending",
-    "products": [
-        {
-            "id": 2,
-            "quantity": 3
-        }
-    ],
-    "createdAt": "2018-04-06T13:21:32.611Z",
-    "updatedAt": "2018-04-06T13:21:32.611Z"
+  "id": 1,
+  "shipment_amount": 10,
+  "total_amount": 300,
+  "weight": 28,
+  "status": "pending",
+  "products": [
+    {
+      "id": 2,
+      "quantity": 3
+    }
+  ],
+  "createdAt": "2018-04-06T13:21:32.611Z",
+  "updatedAt": "2018-04-06T13:21:32.611Z"
 }
 ```
 
@@ -151,12 +158,12 @@ You can only GET /products for now, provided you have some in the database. :)
 
 ```json
 {
-    "products": [
-        {
-            "id": 3,
-            "quantity": 1
-        }
-    ]
+  "products": [
+    {
+      "id": 3,
+      "quantity": 1
+    }
+  ]
 }
 ```
 
@@ -164,13 +171,13 @@ You can only GET /products for now, provided you have some in the database. :)
 
 ```json
 {
-    "status": "paid",
-    "products": [
-        {
-            "id": 3,
-            "quantity": 1
-        }
-    ]
+  "status": "paid",
+  "products": [
+    {
+      "id": 3,
+      "quantity": 1
+    }
+  ]
 }
 ```
 
@@ -182,13 +189,13 @@ You can only GET /products for now, provided you have some in the database. :)
 
 ```json
 [
-    {
-        "id": 1,
-        "amount": 250,
-        "order_id": 3,
-        "createdAt": "2018-04-06T13:21:32.611Z",
-        "updatedAt": "2018-04-06T13:21:32.611Z"
-    }
+  {
+    "id": 1,
+    "amount": 250,
+    "order_id": 3,
+    "createdAt": "2018-04-06T13:21:32.611Z",
+    "updatedAt": "2018-04-06T13:21:32.611Z"
+  }
 ]
 ```
 
@@ -196,10 +203,10 @@ You can only GET /products for now, provided you have some in the database. :)
 
 ```json
 {
-    "id": 1,
-    "amount": 250,
-    "order_id": 3,
-    "createdAt": "2018-04-06T13:21:32.611Z",
-    "updatedAt": "2018-04-06T13:21:32.611Z"
+  "id": 1,
+  "amount": 250,
+  "order_id": 3,
+  "createdAt": "2018-04-06T13:21:32.611Z",
+  "updatedAt": "2018-04-06T13:21:32.611Z"
 }
 ```

@@ -2,8 +2,8 @@
 
 source 'https://rubygems.org'
 
-ruby '2.5.3'
-gem 'rails', '5.1.6.2'
+ruby '2.5.7'
+gem 'rails', '5.2.4'
 
 gem 'pg' # Using PostgreSQL as DB
 gem 'puma'
@@ -12,8 +12,8 @@ gem 'haml-rails'
 gem 'jbuilder'
 
 group :assets do
-  gem 'sass-rails'
-  gem 'uglifier'
+  # gem 'sass-rails'
+  # gem 'uglifier'
 end
 
 group :console do

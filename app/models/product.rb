@@ -6,5 +6,5 @@ class Product < ApplicationRecord
 
   validates :name, :price, :weight, presence: true
 
-  scope :sort, ->(parameter) { order(parameter).order(created_at: :desc) }
+  scope :order_by, ->(parameter) { order(parameter).order(created_at: :desc) }
 end

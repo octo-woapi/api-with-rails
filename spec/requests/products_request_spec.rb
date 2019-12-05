@@ -10,7 +10,7 @@ describe 'GET /v1/products', type: :request do
   end
 
   it 'returns HTTP status 200' do
-    expect(response).to have_http_status 200
+    expect(response).to have_http_status :ok
   end
 
   it 'returns all products' do

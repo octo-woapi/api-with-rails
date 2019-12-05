@@ -76,6 +76,7 @@ RSpec.describe Api::V1::OrdersController, type: :controller do
 
       it('does not call use case') { expect(UseCases::CreateOrder).not_to have_received(:with_products!) }
       it('returns http bad_request') { expect(response).to have_http_status(:bad_request) }
+
       it('returns a json error') do
         expect(response.body).to include('The following attributes are missing')
         expect(response.body).to include('products')
@@ -155,6 +156,7 @@ RSpec.describe Api::V1::OrdersController, type: :controller do
 
       it('does not call use case') { expect(UseCases::UpdateOrder).not_to have_received(:with_products!) }
       it('returns http bad_request') { expect(response).to have_http_status(:bad_request) }
+
       it('returns a json error') do
         expect(response.body).to include('The following attributes are missing: status, products')
       end

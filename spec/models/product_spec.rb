@@ -23,12 +23,12 @@ RSpec.describe Product, type: :model do
   end
 
   describe 'scopes' do
-    describe '.sort' do
+    describe '.order_by' do
       it do
         create :product, name: 'Red Skirt'
         create :product, name: 'Black Dress'
 
-        products = Product.sort('name')
+        products = Product.order_by('name')
 
         expect(products.map(&:name)).to eq(['Black Dress', 'Red Skirt'])
       end

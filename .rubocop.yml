@@ -3,9 +3,9 @@ require: rubocop-rspec
 AllCops:
   TargetRubyVersion: 2.5
   Exclude:
-    - 'bin/*'
-    - 'tmp/**/*'
-    - 'db/schema.rb'
+    - "bin/*"
+    - "tmp/**/*"
+    - "db/schema.rb"
 
 Metrics/LineLength:
   Max: 120
@@ -25,3 +25,6 @@ RSpec/ExampleLength:
 
 RSpec/NestedGroups:
   Max: 4
+
+RSpec/DescribedClass:
+  Enabled: false
