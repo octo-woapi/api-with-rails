@@ -11,10 +11,10 @@ gem 'puma'
 gem 'haml-rails'
 gem 'jbuilder'
 
-group :assets do
-  # gem 'sass-rails'
-  # gem 'uglifier'
-end
+# group :assets do
+#   gem 'sass-rails'
+#   gem 'uglifier'
+# end
 
 group :console do
   gem 'awesome_print'
